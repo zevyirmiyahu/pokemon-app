@@ -11,7 +11,7 @@ export default class Pokedex extends Component {
   render() {
     return (
       <View>
-        <Text> Pokedex </Text>
+        <Text> Pokedex! </Text>
       </View>
     );
   }
