@@ -1,11 +1,23 @@
 import { createStore } from 'redux';
 
-storePokemon = (state = [], action) => {
+
+const initialState = {
+    pokemon: {
+        name: '',
+        id: -1,
+        image: '',
+    },
+    pokemonList: []
+}
+
+storePokemon = (state = initialState, action) => {
     switch(action.type) {
         case 'STORE_POKEMON':
             return {
-                state: [...state.pokemonList]
+                pokemon: state.pokemon,
+                pokemonList: state.pokemonList.push(state.pokemon)
             }
+        default: return state;
     }
 }
 

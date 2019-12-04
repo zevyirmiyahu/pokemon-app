@@ -15,13 +15,12 @@ export const getPokemon = (id) => {
 }
 
 class Pokedex extends Component {
-    initialState = {
-        name: '',
-        id: -1,
-        image: '',
-    }
     state = {
-        pokemon: initialState,
+        pokemon: {
+            name: '',
+            id: -1,
+            image: '',  
+        },
         pokemonList: []
     }
 
@@ -44,9 +43,10 @@ class Pokedex extends Component {
             .then(responseJson => {
                 pokemon.name = responseJson.name;
                 pokemon.image = '';
-                this.props.dispatch('');
-                return pokemon;
+                state.pokemon = pokemon;
+                this.addToPokemonList();
             }).catch(error => console.log(error)); // catches errors if any
+            console.log(this.state.pokemon);
     }
 
     render() {
@@ -54,9 +54,13 @@ class Pokedex extends Component {
             <View>
                 <Text> Pokedex </Text>
                 {/* <Button title='Random Pokemon' onPress={() => {this.props.dispatch({type: 'RANDOM_POKEMON'})}} /> */}
-                <Button title='Random Pokemon' onPress={() => { getRandomPokemon; console.log(this.props.pokemonList) }} />
+                <Button title='Random Pokemon' 
+                    onPress={() => { 
+                        let pokemon = this.getRandomPokemon(); 
+                        console.log(this.props.pokemonList); 
+                    }} />
 
-                <Text>Name: {this.props.pokemon}</Text>
+                {/* <Text>Name: {this.props.pokemon}</Text> */}
             </View>
         );
     }
