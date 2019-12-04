@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, Button } from 'react-native';
+import { View, Text, Button, StyleSheet, TouchableOpacity } from 'react-native';
 import { connect } from 'react-redux';
 
 // GET request for a pokemon with particular id
@@ -30,21 +30,52 @@ class Pokedex extends Component {
     addToPokemonList = () => {
         this.props.dispatch({ type: 'STORE_POKEMON' });
     }
-    
+
     render() {
         return (
             <View>
-                <Text> Pokedex </Text>
-                <Button title='Random Pokemon' 
+                <Text style={styles.title}> Pokedex </Text>
+                {/* <Button title='Random Pokemon' 
                     onPress={() => { 
                         this.getRandomPokemon(); 
                         this.addToPokemonList();
                         console.log(this.props.pokemonList); 
-                    }} />
+                    }} /> */}
+
+                    <TouchableOpacity 
+                    style={styles.buttonContainer}
+                    onPress={() => {
+                        this.getRandomPokemon(); 
+                        this.addToPokemonList();
+                        console.log(this.props.pokemonList); 
+                    }}>
+                        <Text style={styles.buttonText}>Random Pokemon</Text>
+                    </TouchableOpacity>
             </View>
         );
     }
 }
+
+const styles = StyleSheet.create({
+    title: {
+        fontSize: 25,
+        fontWeight: 'bold',
+        alignSelf: 'center'
+        
+    },
+    buttonText: {
+        fontSize: 20,
+        fontWeight: 'bold',
+        color: 'white',
+    },
+    buttonContainer: {
+        padding: 15,
+        backgroundColor: '#eb4034', // red
+        borderBottomColor: '#8a211a', // darker red
+        borderRadius: 10,
+        alignSelf: 'center'
+    }
+});
 
 mapStateToProps = (state) => {
     return {
