@@ -30,7 +30,7 @@ storePokemon = (state = initialState, action) => {
             })
             return {
                 pokemon: pokemon,
-                pokemonList: state.pokemonList
+                pokemonList: state.pokemonList,
             }
             // fetch(URL)
             //     .then(response => response.json())
@@ -48,7 +48,7 @@ storePokemon = (state = initialState, action) => {
         case 'STORE_POKEMON':
             return {
                 pokemon: state.pokemon,
-                pokemonList: [...state.pokemonList, state.pokemon]
+                pokemonList: [...state.pokemonList, state.pokemon],
             }
         default: return state;
     }

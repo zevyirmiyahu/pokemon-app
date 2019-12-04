@@ -2,18 +2,8 @@ import React, { Component } from 'react';
 import { View, Text, Button, Image, StyleSheet, TouchableOpacity } from 'react-native';
 import { connect} from 'react-redux';
 
-// GET request for a pokemon with particular id
-export const getPokemon = (id) => {
-    let URL = 'https://pokeapi.co/api/v2/pokemon/' + id;
-    let pokemon = new pokemon();
-    fetch(URL)
-        .then(response => response.json())
-        .then(responseJson => {
-            return responseJson;
-        }).catch(error => console.log(error)); // catches errors if any
-}
-
 class Pokedex extends Component {
+    allPokemon = [];
     state = {
         pokemon: {
             name: '',
@@ -21,7 +11,6 @@ class Pokedex extends Component {
             image: '',  
         },
         pokemonList: [],
-        key: 0
     }
 
     getRandomPokemon = () => {
@@ -40,8 +29,7 @@ class Pokedex extends Component {
                     source={{uri: this.state.pokemon.image}}
                     style={styles.image} 
                 />
-                <Text>Name: {this.state.pokemon.name}</Text>
-                <Text>Key: {this.state.key}</Text>
+                <Text style={styles.pokemonName}>Name: {this.state.pokemon.name}</Text>
             </View>
         );
     }
@@ -50,29 +38,23 @@ class Pokedex extends Component {
         return (
             <View>
                 <Text style={styles.title}> Pokedex </Text>
-    
-                    <this.PokemonDisplay key={this.state.key}/>
-
-                    <TouchableOpacity 
-                    style={styles.buttonContainer}
-                    onPress={() => {
-                        this.getRandomPokemon(); 
-                        this.addToPokemonList();
-                        this.setState({
-                            pokemon: {
-                                name: this.props.pokemon.name,
-                                id: this.props.pokemon.id,
-                                image: this.props.pokemon.image
-                            },
-                            key: Math.random()});
-
-                        // console.log(this.props.pokemonList); 
-                        
-                    }}>
-                        
-                        <Text style={styles.buttonText}>Random Pokemon</Text>
-                    </TouchableOpacity>
-                    {console.log(this.props.pokemon)}
+                <this.PokemonDisplay />
+                <TouchableOpacity 
+                style={styles.buttonContainer}
+                onPress={() => {
+                    this.getRandomPokemon(); 
+                    this.addToPokemonList();
+                    this.setState({
+                        pokemon: {
+                            name: this.props.pokemon.name,
+                            id: this.props.pokemon.id,
+                            image: this.props.pokemon.image
+                        }
+                    });
+                }}>
+                    
+                    <Text style={styles.buttonText}>Random Pokemon</Text>
+                </TouchableOpacity>
             </View>
         );
     }
@@ -101,13 +83,19 @@ const styles = StyleSheet.create({
         alignSelf: 'center',
         width: 150, 
         height: 150
+    },
+    pokemonName: {
+        fontSize: 20,
+        fontWeight: 'bold',
+        marginRight: 20,
+        padding: 10
     }
 });
 
 mapStateToProps = (state) => {
     return {
         pokemon: state.pokemon,
-        pokemonList: state.pokemonList
+        pokemonList: state.pokemonList,
     }
 }
 
