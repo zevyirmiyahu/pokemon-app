@@ -9,10 +9,10 @@ export default class App extends Component {
     return (
       <SafeAreaView>
         <View>
-        <PokedexScreen />
+          <PokedexScreen />
         </View>
       </SafeAreaView>
-      
+
     )
   }
 }
