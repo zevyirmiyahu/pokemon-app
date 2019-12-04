@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { View, Text, Button, Image, StyleSheet, TouchableOpacity } from 'react-native';
-import { connect } from 'react-redux';
-import store from '../store/Store';
+import { connect} from 'react-redux';
 
 // GET request for a pokemon with particular id
 export const getPokemon = (id) => {
@@ -21,7 +20,8 @@ class Pokedex extends Component {
             id: -1,
             image: '',  
         },
-        pokemonList: []
+        pokemonList: [],
+        key: 0
     }
 
     getRandomPokemon = () => {
@@ -34,14 +34,14 @@ class Pokedex extends Component {
 
     // Component used to Display current Pokemon
     PokemonDisplay = () => {
-        console.log(this.props.pokemon.id);
         return(
             <View>
                 <Image 
-                    source={{uri: this.props.pokemon.image}}
+                    source={{uri: this.state.pokemon.image}}
                     style={styles.image} 
                 />
-                <Text>Name: {this.props.pokemon.name}</Text>
+                <Text>Name: {this.state.pokemon.name}</Text>
+                <Text>Key: {this.state.key}</Text>
             </View>
         );
     }
@@ -51,17 +51,28 @@ class Pokedex extends Component {
             <View>
                 <Text style={styles.title}> Pokedex </Text>
     
-                    <this.PokemonDisplay />
+                    <this.PokemonDisplay key={this.state.key}/>
 
                     <TouchableOpacity 
                     style={styles.buttonContainer}
                     onPress={() => {
                         this.getRandomPokemon(); 
                         this.addToPokemonList();
-                        console.log(this.props.pokemonList); 
+                        this.setState({
+                            pokemon: {
+                                name: this.props.pokemon.name,
+                                id: this.props.pokemon.id,
+                                image: this.props.pokemon.image
+                            },
+                            key: Math.random()});
+
+                        // console.log(this.props.pokemonList); 
+                        
                     }}>
+                        
                         <Text style={styles.buttonText}>Random Pokemon</Text>
                     </TouchableOpacity>
+                    {console.log(this.props.pokemon)}
             </View>
         );
     }
