@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { View, Text, Button } from 'react-native';
-import { connect } from 'tls';
+import { connect } from 'react-redux';
 
 // GET request for a pokemon with particular id
 export const getPokemon = (id) => {
@@ -34,25 +34,26 @@ export const getRandomPokemon = () => {
     }).catch(error => console.log(error)); // catches errors if any
 }
 
-export default class Pokedex extends Component {
+class Pokedex extends Component {
     constructor(props) {
         super(props);
         this.state = {
             pokemon: {}
         };
     }
-    URL = 'https://pokeapi.co/api/v2/pokemon/';
     
-    componentDidMount() {
-        fetch(this.URL)
-        .then(response => response.json())
-        .then(responseJson => {
-            console.log(responseJson);
-            this.setState({
-                pokemon: responseJson
-            });
-        }).catch(error => console.log(error)); // catches errors if any
-    }
+    // URL = 'https://pokeapi.co/api/v2/pokemon/';
+    
+    // componentDidMount() {
+    //     fetch(this.URL)
+    //     .then(response => response.json())
+    //     .then(responseJson => {
+    //         console.log(responseJson);
+    //         this.setState({
+    //             pokemon: responseJson
+    //         });
+    //     }).catch(error => console.log(error)); // catches errors if any
+    // }
       
     render() {
         return (
