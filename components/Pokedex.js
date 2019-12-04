@@ -31,7 +31,7 @@ class Pokedex extends Component {
     addToPokemonList = () => {
         this.props.dispatch({ type: 'STORE_POKEMON' });
     }
-    
+
     // Component used to Display current Pokemon
     PokemonDisplay = () => {
         console.log(this.props.pokemon.id);
@@ -39,7 +39,7 @@ class Pokedex extends Component {
             <View>
                 <Image 
                     source={{uri: this.props.pokemon.image}}
-                    style={{width: 200, height: 200}} 
+                    style={styles.image} 
                 />
                 <Text>Name: {this.props.pokemon.name}</Text>
             </View>
@@ -85,6 +85,11 @@ const styles = StyleSheet.create({
         borderBottomColor: '#8a211a', // darker red
         borderRadius: 10,
         alignSelf: 'center'
+    },
+    image: {
+        alignSelf: 'center',
+        width: 150, 
+        height: 150
     }
 });
 
