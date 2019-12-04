@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import { View, Text, Button, StyleSheet, TouchableOpacity } from 'react-native';
+import { View, Text, Button, Image, StyleSheet, TouchableOpacity } from 'react-native';
 import { connect } from 'react-redux';
+import store from '../store/Store';
 
 // GET request for a pokemon with particular id
 export const getPokemon = (id) => {
@@ -30,17 +31,27 @@ class Pokedex extends Component {
     addToPokemonList = () => {
         this.props.dispatch({ type: 'STORE_POKEMON' });
     }
-
+    
+    // Component used to Display current Pokemon
+    PokemonDisplay = () => {
+        console.log(this.props.pokemon.id);
+        return(
+            <View>
+                <Image 
+                    source={{uri: this.props.pokemon.image}}
+                    style={{width: 200, height: 200}} 
+                />
+                <Text>Name: {this.props.pokemon.name}</Text>
+            </View>
+        );
+    }
+ 
     render() {
         return (
             <View>
                 <Text style={styles.title}> Pokedex </Text>
-                {/* <Button title='Random Pokemon' 
-                    onPress={() => { 
-                        this.getRandomPokemon(); 
-                        this.addToPokemonList();
-                        console.log(this.props.pokemonList); 
-                    }} /> */}
+    
+                    <this.PokemonDisplay />
 
                     <TouchableOpacity 
                     style={styles.buttonContainer}

@@ -24,7 +24,7 @@ storePokemon = (state = initialState, action) => {
                 .then(response => response.json())
                 .then(responseJson => {
                     pokemon.name = responseJson.name;
-                    pokemon.image = '';
+                    pokemon.image = responseJson.sprites.front_default;
                 }).catch(error => console.log(error)); // catches errors if any
                 return {
                     pokemon: pokemon,
