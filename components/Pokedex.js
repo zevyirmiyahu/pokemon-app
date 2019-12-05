@@ -1,9 +1,17 @@
 import React, { Component } from 'react';
 import { View, Text, Button, Image, StyleSheet, TouchableOpacity } from 'react-native';
-import { connect} from 'react-redux';
+import { connect } from 'react-redux';
+
+import axios from 'axios';
 
 class Pokedex extends Component {
-    allPokemon = [];
+
+    pokemon = {
+        name: '',
+        id: -1,
+        image: '',  
+    }  
+
     state = {
         pokemon: {
             name: '',
@@ -11,14 +19,29 @@ class Pokedex extends Component {
             image: '',  
         },
         pokemonList: [],
-    }
-
-    getRandomPokemon = () => {
-        this.props.dispatch({ type: 'RANDOM_POKEMON' })
+        testMe: -1,
+        key: 0
     }
     
     addToPokemonList = () => {
         this.props.dispatch({ type: 'STORE_POKEMON' });
+    }
+
+    // Call API and returns a random pokemon object
+    getRandomPokemon = () => {
+        let id = Math.floor(Math.random() * 100); // random number from 0 - 99
+        let URL = "https://pokeapi.co/api/v2/pokemon-form/" + id;
+        axios.get(URL)
+        .then((response) => {
+            let name = response.data.name;
+            let image = response.data.sprites.front_default // image URL
+            let pokemon = {
+                name: name,
+                id: id,
+                image: image
+            }
+            this.pokemon = pokemon; // set the pokemon
+        });
     }
 
     // Component used to Display current Pokemon
@@ -26,32 +49,25 @@ class Pokedex extends Component {
         return(
             <View>
                 <Image 
-                    source={{uri: this.state.pokemon.image}}
+                    source={{uri: this.pokemon.image}}
                     style={styles.image} 
                 />
-                <Text style={styles.pokemonName}>Name: {this.state.pokemon.name}</Text>
+                <Text style={styles.pokemonName}>Name: {this.pokemon.name}</Text>
             </View>
         );
     }
- 
+
     render() {
         return (
             <View>
                 <Text style={styles.title}> Pokedex </Text>
-                <this.PokemonDisplay />
+                <this.PokemonDisplay key={this.state.key}/>
                 <TouchableOpacity 
-                style={styles.buttonContainer}
-                onPress={() => {
-                    this.getRandomPokemon(); 
-                    this.addToPokemonList();
-                    this.setState({
-                        pokemon: {
-                            name: this.props.pokemon.name,
-                            id: this.props.pokemon.id,
-                            image: this.props.pokemon.image
-                        }
-                    });
-                }}>
+                    style={styles.buttonContainer}
+                    onPress={() => {
+                        this.getRandomPokemon();
+                        this.setState({key: Math.random()}); // forces PokemonDisplay to update
+                    }}>
                     
                     <Text style={styles.buttonText}>Random Pokemon</Text>
                 </TouchableOpacity>
@@ -96,6 +112,8 @@ mapStateToProps = (state) => {
     return {
         pokemon: state.pokemon,
         pokemonList: state.pokemonList,
+        testMe: state.testMe,
+        key: state.key
     }
 }
 

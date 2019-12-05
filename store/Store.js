@@ -7,31 +7,29 @@ const initialState = {
         id: -1,
         image: '',
     },
-    pokemonList: []
+    pokemonList: [],
+    testMe: -1,
+    key: 0
+};
+
+getPokemon = async () => {
+    let id = Math.floor(Math.random() * 100); // random number from 0 - 99
+    let URL = "https://pokeapi.co/api/v2/pokemon-form/" + id;
+    let response = await axios.get(URL)
+    let name = response.data.name;
+    let image = response.data.sprites.front_default // image URL
+    console.log(name);
+    return {
+        name: name,
+        id: id,
+        image: image
+    }
 }
 
 storePokemon = (state = initialState, action) => {
     switch (action.type) {
         case 'RANDOM_POKEMON':
-            let id = Math.floor(Math.random() * 100); // random number from 0 - 99
-            let URL = "https://pokeapi.co/api/v2/pokemon-form/" + id;
-            let pokemon = {
-                name: '',
-                id: id,
-                image: '',
-            }
-            axios.get(URL)
-            .then(function (response) {
-                pokemon.name = response.data.name;
-                pokemon.image = response.data.sprites.front_default // image URL
-            })
-            .catch(function (error) {
-                console.error(error);
-            })
-            return {
-                pokemon: pokemon,
-                pokemonList: state.pokemonList,
-            }
+            return state;
             // fetch(URL)
             //     .then(response => response.json())
             //     .then(responseJson => {
@@ -45,11 +43,12 @@ storePokemon = (state = initialState, action) => {
             //         pokemon: pokemon, // new pokemon
             //         pokemonList: state.pokemonList
             //     }
-        case 'STORE_POKEMON':
-            return {
-                pokemon: state.pokemon,
-                pokemonList: [...state.pokemonList, state.pokemon],
-            }
+        // case 'STORE_POKEMON':
+        //     return {
+        //         pokemon: state.pokemon,
+        //         pokemonList: [...state.pokemonList, state.pokemon],
+        //         testMe: testMe
+        //     }
         default: return state;
     }
 }
