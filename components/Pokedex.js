@@ -52,7 +52,7 @@ class Pokedex extends Component {
                     source={{uri: this.pokemon.image}}
                     style={styles.image} 
                 />
-                <Text style={styles.pokemonName}>Name: {this.pokemon.name}</Text>
+                <Text style={styles.descriptionFont}>Name: {this.pokemon.name}</Text>
             </View>
         );
     }
@@ -96,14 +96,21 @@ const styles = StyleSheet.create({
         alignSelf: 'center'
     },
     image: {
+        marginTop: 50,
         alignSelf: 'center',
         width: 150, 
-        height: 150
+        height: 150,
+        borderWidth: 3,
+        borderRadius: 15,
+        borderColor: '#eb4034', // red
     },
-    pokemonName: {
+    descriptionFont: {
+        backgroundColor: '#eb4034', // red
         fontSize: 20,
         fontWeight: 'bold',
-        marginRight: 20,
+        color: 'white',
+        marginHorizontal: 10,
+        marginVertical: 5,
         padding: 10
     }
 });
