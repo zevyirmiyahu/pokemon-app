@@ -29,7 +29,7 @@ class Pokedex extends Component {
 
     // Call API and returns a random pokemon object
     getRandomPokemon = () => {
-        let id = Math.floor(Math.random() * 100); // random number from 0 - 99
+        let id = Math.floor(Math.random() * 807 + 1); // random number from 1 - 808
         let URL = "https://pokeapi.co/api/v2/pokemon-form/" + id;
         axios.get(URL)
         .then((response) => {
