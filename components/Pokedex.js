@@ -9,7 +9,9 @@ class Pokedex extends Component {
     pokemon = {
         name: '',
         id: -1,
-        image: '',  
+        image: '',
+        imageShiny: '', 
+        ability: [],  
     }  
 
     state = {
@@ -30,18 +32,55 @@ class Pokedex extends Component {
     // Call API and returns a random pokemon object
     getRandomPokemon = () => {
         let id = Math.floor(Math.random() * 808); // random number from 1 - 807
-        let URL = "https://pokeapi.co/api/v2/pokemon-form/" + id;
-        axios.get(URL)
-        .then((response) => {
-            let name = response.data.name;
-            let image = response.data.sprites.front_default // image URL
+        let URL1 = "https://pokeapi.co/api/v2/pokemon-form/" + id;
+        let URL2 = "https://pokeapi.co/api/v2/pokemon/" + id;
+        
+        axios.all([axios.get(URL1), axios.get(URL2)])
+        .then(axios.spread((response1, response2) => {
+            console.log(response1.data.sprites.front_default);
+            //For response 1 from URL 1
+            let name = response1.data.name;
+            let image = response1.data.sprites.front_default; // image URL
+            let imageShiny = response1.data.sprites.front_shiny;
+            //For response 2 from URL 2
+            let abilitiesArray = response2.data.abilities;  
+            let ability = '';
+            for(i = 0; i < abilitiesArray.length; i++) {
+                ability += abilitiesArray[i].ability.name + " ";
+            }   
+            console.log(ability);
+
             let pokemon = {
                 name: name,
                 id: id,
-                image: image
+                image: image,
+                imageShiny: imageShiny,
+                ability: ability
             }
             this.pokemon = pokemon; // set the pokemon
-        });
+        }));
+
+        // axios.get(URL)
+        // .then((response) => {
+        //     console.log(response.data.abilities[0].ability.name);
+        //     let name = response.data.forms.name;
+        //     let image = response.data.forms.sprites.front_default; // image URL
+        //     let imageShiny = response.data.forms.sprites.front_shiny;
+        //     let abilitiesArray = response.data.abilities;  
+        //     let ability = ''
+        //     for(i = 0; i < abilitiesArray.length; i++) {
+        //         ability += abilitiesArray[i].ability.name + " ";
+        //     }   
+        //     console.log(abilitiesArray);
+        //     let pokemon = {
+        //         name: name,
+        //         id: id,
+        //         image: image,
+        //         imageShiny: imageShiny,
+        //         ability: ability
+        //     }
+        //     this.pokemon = pokemon; // set the pokemon
+        // });
     }
 
     // Component used to Display current Pokemon
@@ -53,6 +92,9 @@ class Pokedex extends Component {
                     style={styles.image} 
                 />
                 <Text style={styles.descriptionFont}>Name: {this.pokemon.name}</Text>
+                <Text style={styles.descriptionFont}>Pokemon #: {this.pokemon.id}</Text>
+                <Text style={styles.descriptionFont}>Abilities: {this.pokemon.ability}</Text>
+
             </View>
         );
     }
