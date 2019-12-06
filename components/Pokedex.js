@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, Button, Image, StyleSheet, TouchableOpacity } from 'react-native';
+import { View, Text, Image, StyleSheet, TouchableOpacity } from 'react-native';
 import { connect } from 'react-redux';
 
 import axios from 'axios';
@@ -58,28 +58,6 @@ class Pokedex extends Component {
             }
             this.pokemon = pokemon; // set the pokemon
         }));
-
-        // axios.get(URL)
-        // .then((response) => {
-        //     console.log(response.data.abilities[0].ability.name);
-        //     let name = response.data.forms.name;
-        //     let image = response.data.forms.sprites.front_default; // image URL
-        //     let imageShiny = response.data.forms.sprites.front_shiny;
-        //     let abilitiesArray = response.data.abilities;  
-        //     let ability = ''
-        //     for(i = 0; i < abilitiesArray.length; i++) {
-        //         ability += abilitiesArray[i].ability.name + " ";
-        //     }   
-        //     console.log(abilitiesArray);
-        //     let pokemon = {
-        //         name: name,
-        //         id: id,
-        //         image: image,
-        //         imageShiny: imageShiny,
-        //         ability: ability
-        //     }
-        //     this.pokemon = pokemon; // set the pokemon
-        // });
     }
 
     // Component used to Display current Pokemon
