@@ -48,7 +48,6 @@ class Pokedex extends Component {
             for(i = 0; i < abilitiesArray.length; i++) {
                 ability += abilitiesArray[i].ability.name + " ";
             }   
-            console.log(ability);
 
             let pokemon = {
                 name: name,
@@ -86,11 +85,25 @@ class Pokedex extends Component {
     // Component used to Display current Pokemon
     PokemonDisplay = () => {
         return(
-            <View>
-                <Image 
-                    source={{uri: this.pokemon.image}}
-                    style={styles.image} 
-                />
+            <View style={{marginVertical: 15}}>
+                <View style={{alignItems: 'center'}}>
+                    <View style={{flexDirection: 'row'}}>
+                        <View style={{flexDirection: 'column'}}>
+                            <Text style={styles.imageHeader}>Normal</Text>
+                            <Image 
+                                source={{uri: this.pokemon.image}}
+                                style={styles.image} 
+                            />
+                        </View>
+                        <View style={{flexDirection: 'column'}}>
+                            <Text style={styles.imageHeader}>Shiny</Text>
+                            <Image 
+                                source={{uri: this.pokemon.imageShiny}}
+                                style={styles.image} 
+                            />
+                        </View>
+                    </View>
+                </View>
                 <Text style={styles.descriptionFont}>Name: {this.pokemon.name}</Text>
                 <Text style={styles.descriptionFont}>Pokemon #: {this.pokemon.id}</Text>
                 <Text style={styles.descriptionFont}>Abilities: {this.pokemon.ability}</Text>
@@ -138,7 +151,7 @@ const styles = StyleSheet.create({
         alignSelf: 'center'
     },
     image: {
-        marginTop: 50,
+        margin: 5,
         alignSelf: 'center',
         width: 150, 
         height: 150,
@@ -146,6 +159,11 @@ const styles = StyleSheet.create({
         borderRadius: 15,
         borderColor: '#eb4034', // red
     },
+    imageHeader: {
+        alignSelf: 'center',
+        fontSize: 15,
+        fontWeight: 'bold'
+    },  
     descriptionFont: {
         backgroundColor: '#eb4034', // red
         fontSize: 20,
