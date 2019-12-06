@@ -101,7 +101,6 @@ class Pokedex extends Component {
                         this.getRandomPokemon();
                         this.setState({key: Math.random()}); // forces PokemonDisplay to update
                     }}>
-                    
                     <Text style={styles.buttonText}>Random Pokemon</Text>
                 </TouchableOpacity>
             </View>
