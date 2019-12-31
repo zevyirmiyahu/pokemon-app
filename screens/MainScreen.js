@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
+import { View, Text, Image, StyleSheet } from 'react-native';
+import Button from '../components/mainComponents/Button';
 
 export default class MainScreen extends Component {
   constructor(props) {
@@ -11,21 +12,16 @@ export default class MainScreen extends Component {
   render() {
     return (
       <View>
-        <Text> MainScreen </Text>
-        <TouchableOpacity 
-            style={styles.button} 
-            onPress={() => this.props.navigation.navigate('Pokedex')}>
-            <Text>Pokedex</Text>
-        </TouchableOpacity>
+          <Image
+            source={require('../images/pokemon-logo.png')}
+            style={{alignSelf: 'center', width: 250, height: 92}}
+          />
+        <View style={{marginVertical: 15, marginHorizontal: 50}}>
+            <Button/>
+        </View>
       </View>
     );
   }
 }
 
-const styles = StyleSheet.create({
-    button: {
-        borderWidth: 3,
-        borderColor: '#8a211a', // darker red
-        backgroundColor: '#eb4034', // red
-    },
-});
+const styles = StyleSheet.create({});
