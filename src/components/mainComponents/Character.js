@@ -3,7 +3,7 @@ import { View, Text } from 'react-native';
 
 const walk1 = () => {
     return(
-        <Image source={require('../../src/images/CharacterWalk1.png')} />
+        <Image source={require('../../src/images/CharacterWalk1.png')} style={{height: 50, width: 50}} />
     );
 }
 

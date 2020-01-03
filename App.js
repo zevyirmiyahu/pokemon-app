@@ -4,9 +4,9 @@ import { createAppContainer } from 'react-navigation';
 import { createStackNavigator } from 'react-navigation-stack';
 import { Provider } from 'react-redux';
 
-import store from './store/Store';
-import MainScreen from './screens/MainScreen';
-import PokedexScreen from './screens/PokedexScreen';
+import store from './src/store/Store';
+import MainScreen from './src/screens/MainScreen';
+import PokedexScreen from './src/screens/PokedexScreen';
 
 const MainStackNavigator = createStackNavigator({
   Main: MainScreen,
