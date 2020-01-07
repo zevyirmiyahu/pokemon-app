@@ -14,17 +14,35 @@ export default class MainScreen extends Component {
   render() {
     return (
       <View>
-          <Image
-            source={require('../images/pokemon-logo.png')}
-            style={{alignSelf: 'center', width: 250, height: 92}}
-          />
+        <Image
+          source={require('../images/pokemon-logo.png')}
+          style={{ alignSelf: 'center', width: 250, height: 92 }}
+        />
+
+        <View style={styles.characterContaienr}>
           <Character />
-        <View style={{marginVertical: 15, marginHorizontal: 50}}>
-            <Button/>
+        </View>
+
+        <View style={styles.buttonsContainer}>
+          <Button title={"Pokemon"} />
+          <Button title={"Items"} />
+          <Button title={"Pokedex"} />
         </View>
       </View>
-    );  
+    );
   }
 }
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  characterContaienr: {
+    marginVertical: 10,
+    alignSelf: 'center'
+  },
+  buttonsContainer: {
+    marginVertical: 50,
+    justifyContent: 'space-around',
+    flexDirection: 'row',
+
+  }
+
+});

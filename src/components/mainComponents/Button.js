@@ -12,8 +12,8 @@ class Button extends Component {
     return (
         <TouchableOpacity 
             style={styles.buttonContainer} 
-            onPress={() => this.props.navigation.navigate('Pokedex')}>
-            <Text style={styles.text}>Pokedex</Text>
+            onPress={() => this.props.navigation.navigate(this.props.title)}>
+            <Text style={styles.text}>{this.props.title}</Text>
         </TouchableOpacity>
     );
   }
@@ -21,7 +21,8 @@ class Button extends Component {
 
 const styles = StyleSheet.create({
     buttonContainer: {
-        padding: 10,
+        paddingVertical: 20,
+        paddingHorizontal: 15,
         borderRadius: 10,
         borderWidth: 3,
         borderColor: '#8a211a', // darker red

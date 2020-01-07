@@ -1,17 +1,17 @@
 import React, { Component } from 'react';
-import { View, Text, Image, InteractionManager } from 'react-native';
+import { View, Text, Image, StyleSheet } from 'react-native';
 
-// players still position
+// Players stand position
 const walk1 = () => {
-    return(
-        <Image source={require('../../images/CharacterWalk1.png')} style={{height: 50, width: 50}} />
-    );
+  return (
+    <Image source={require('../../images/CharacterWalk1.png')} style={styles.image} />
+  );
 }
 
-// player taking a step position
+// Player taking a step position
 const walk2 = () => {
-  return(
-    <Image source={require('../../images/CharacterWalk2.png')} style={{height: 50, width: 50}} />
+  return (
+    <Image source={require('../../images/CharacterWalk2.png')} style={styles.image} />
   );
 }
 
@@ -28,7 +28,7 @@ export default class Character extends Component {
   // Function that controls the walk motion of character
   walking = () => {
     console.log("walking");
-    if(this.state.flag) {
+    if (this.state.flag) {
       this.setState({
         characterImage: walk1(),
         flag: false
@@ -41,23 +41,10 @@ export default class Character extends Component {
       });
     }
   }
-    // timeNow = new Date().getSeconds();
 
-    // // Second part of boolean is when timeNow goes from 59 secs back to 0 secs
-    // if(timeNow > currentTime || timeNow - currentTime <= 0) {
-    //   this.setState({
-    //     characterImage: walk2
-    //   })
-    // }
-    // else {
-    //   this.setState({
-    //     characterImage: walk1()
-    //   })
-    // }
-    
   componentDidMount() {
     interval = setInterval(() => {
-      if(this.state.flag) {
+      if (this.state.flag) {
         this.setState({
           characterImage: walk1(),
           flag: false
@@ -69,7 +56,7 @@ export default class Character extends Component {
           flag: true
         });
       }
-    }, 500);
+    }, 400);
   }
 
   componentWillUnmount() {
@@ -77,12 +64,32 @@ export default class Character extends Component {
   }
 
   render() {
-    
+
     return (
       <View>
-        <Text> Character </Text>
-        {this.state.characterImage}
+        <Text style={styles.header}> Character </Text>
+
+        <View style={styles.imageContainer}>
+          {this.state.characterImage}
+        </View>
       </View>
     );
   }
 }
+
+const styles = StyleSheet.create({
+  header: {
+    alignSelf: 'center',
+    fontSize: 15,
+    fontWeight: 'bold'
+  },
+  image: {
+    width: 80,
+    height: 80
+  },  
+  imageContainer: {
+    paddingVertical: 20,
+    paddingHorizontal: 200,
+    backgroundColor: '#9df0f5'
+  }
+});
