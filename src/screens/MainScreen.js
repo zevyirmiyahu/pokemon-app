@@ -1,5 +1,14 @@
 import React, { Component } from 'react';
-import { View, Text, Modal, Image, StyleSheet } from 'react-native';
+import {
+  View,
+  SafeAreaView,
+  Text,
+  TouchableOpacity,
+  Modal,
+  Image,
+  StyleSheet,
+  TouchableHighlightBase
+} from 'react-native';
 import Button from '../components/Button';
 
 import Character from '../components/Character';
@@ -8,17 +17,18 @@ export default class MainScreen extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      modalVisible: true,
     };
   }
 
   TitleScreen = () => {
-    let props = { ...this.props, title: "Main" };
     return (
-      <View>
+      <View style={styles.modalContainer}>
         <Modal
+          style={styles.modalContainer}
           visible={this.state.modalVisible}
-          animationType='slide'
-
+          transparent={false}
+          animationType='fade'
         >
           <View style={{ padding: 50 }}>
             <Image
@@ -27,7 +37,12 @@ export default class MainScreen extends Component {
             />
 
           </View>
-          <Button {...props} />
+          <TouchableOpacity
+            style={styles.modalButtonContainer}
+            onPress={() => this.setState({ modalVisible: false })}
+          >
+            <Text style={styles.modalButtonText}>Play</Text>
+          </TouchableOpacity>
 
         </Modal>
       </View>
@@ -37,7 +52,8 @@ export default class MainScreen extends Component {
 
   render() {
     return (
-      <View>
+      <SafeAreaView>
+        <this.TitleScreen />
         <Image
           source={require('../images/pokemon-logo.png')}
           style={{ alignSelf: 'center', width: 250, height: 92 }}
@@ -52,7 +68,7 @@ export default class MainScreen extends Component {
           <Button title={"Items"} />
           <Button title={"Pokedex"} />
         </View>
-      </View>
+      </SafeAreaView>
     );
   }
 }
@@ -66,7 +82,26 @@ const styles = StyleSheet.create({
     marginVertical: 50,
     justifyContent: 'space-around',
     flexDirection: 'row',
-
+  },
+  modalButtonContainer: {
+    marginTop: 150,
+    marginHorizontal: 50,
+    paddingVertical: 20,
+    paddingHorizontal: 15,
+    borderRadius: 10,
+    borderWidth: 3,
+    borderColor: '#8a211a', // darker red
+    backgroundColor: '#eb4034', // red
+  },
+  modalButtonText: {
+    alignSelf: 'center',
+    fontSize: 15,
+    fontWeight: 'bold',
+    color: 'white',
+  },
+  modalContainer: {
+    flex: 1,
+    backgroundColor: 'pink'
   }
 
 });

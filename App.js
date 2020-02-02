@@ -8,20 +8,21 @@ import { Provider } from 'react-redux';
 
 import store from './src/store/Store';
 import MainScreen from './src/screens/MainScreen';
+import ItemScreen from './src/screens/ItemScreen';
 import PokedexScreen from './src/screens/PokedexScreen';
-import TitleScreen from './src/screens/TitleScreen';
 
 const BottomTabNavigator = createBottomTabNavigator({
   Main: MainScreen,
-  Pokedex: PokedexScreen
+  Pokemon: PokedexScreen,
+  Items: ItemScreen
 });
+  
+// const StackNavigator = createStackNavigator({
+//   Title: TitleScreen,
+//   Main: BottomTabNavigator,
+// }); 
 
-const StackNavigator = createStackNavigator({
-  Title: TitleScreen,
-  Main: BottomTabNavigator,
-}); 
-
-const App = createAppContainer(StackNavigator);
+const App = createAppContainer(BottomTabNavigator);
 export default App;
 
 // export default class App extends Component {
