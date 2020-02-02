@@ -12,6 +12,7 @@ import {
 import Button from '../components/Button';
 
 import Character from '../components/Character';
+import GameEngine from '../engine/GameEngine';
 
 export default class MainScreen extends Component {
   constructor(props) {
@@ -70,6 +71,7 @@ export default class MainScreen extends Component {
   render() {
     return (
       <View style={styles.screenContainer}>
+          <GameEngine/>
           {/* <this.TitleScreen /> */}
           <this.Title />
           <this.CharacterAnimation />
@@ -89,7 +91,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#CE2029',
+    backgroundColor: '#CE2029', // fire engine red
   },
   characterContaienr: {
     marginVertical: 10,
