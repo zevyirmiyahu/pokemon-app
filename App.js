@@ -3,6 +3,7 @@ import { Text, View, SafeAreaView } from 'react-native'
 import { createAppContainer } from 'react-navigation';
 import { createStackNavigator } from 'react-navigation-stack';
 import { createBottomTabNavigator } from 'react-navigation-tabs';
+import { Icon } from 'react-native-elements';
 
 import { Provider } from 'react-redux';
 
@@ -12,11 +13,37 @@ import ItemScreen from './src/screens/ItemScreen';
 import PokedexScreen from './src/screens/PokedexScreen';
 
 const BottomTabNavigator = createBottomTabNavigator({
-  Main: MainScreen,
-  Pokemon: PokedexScreen,
-  Items: ItemScreen
-});
-  
+  Main: {
+    screen: MainScreen,
+    navigationOptions: {
+      tabBarIcon: () => (
+        <Icon name="check-square" type='font-awesome'
+          color='#e91e63' />
+      )
+    }
+  },
+  Pokemon: {
+    screen: PokedexScreen,
+  },
+  Items: {
+    screen: ItemScreen,
+  },
+},
+  {
+    defaultNavigationOptions: {
+      tabBarOptions: {
+        labelStyle: {
+          fontSize: 18,
+          fontFamily: 'Heiti SC'
+        },
+        labelPosition: 'beside-icon',
+        activeTintColor: '#e91e63',
+        inactiveTintColor: 'gray',
+      },
+    },
+
+  });
+
 // const StackNavigator = createStackNavigator({
 //   Title: TitleScreen,
 //   Main: BottomTabNavigator,
