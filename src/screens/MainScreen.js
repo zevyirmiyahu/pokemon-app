@@ -68,20 +68,6 @@ export default class MainScreen extends Component {
     );
   }
 
-  HealthMeter = () => {
-    return (
-      <View style={{ flexDirection: 'row' }}>
-        <Icon
-          raised
-          name='heartbeat'
-          type='font-awesome'
-          color='#f50'
-        />
-        <Text style={styles.healthMeter}>100%</Text>
-      </View>
-    );
-  }
-
   Seperator = (width) => {
     return (
       <View style={{ borderBottomWidth: width, borderColor: '#9e1920', paddingHorizontal: '50%' }}></View>
@@ -108,19 +94,55 @@ export default class MainScreen extends Component {
     );
   }
 
+  HealthMeter = () => {
+    return (
+      <View style={{ flexDirection: 'row' }}>
+        <Icon
+          raised
+          name='heartbeat'
+          type='font-awesome'
+          color='#f50'
+        />
+        <Text style={styles.healthMeter}>100%</Text>
+      </View>
+    );
+  }
+
+  PokeballMeter = () => {
+    return (
+      <Image
+        style={styles.pokeballMeter}
+        source={require('../images/pokeball.png')}
+      />
+    );
+  }
+
+  LifeMeters = () => {
+    return (
+      <View style={styles.lifeMeters}>
+        <this.HealthMeter />
+        <this.PokeballMeter />
+      </View>
+    );
+  }
+
   render() {
     return (
       <View style={styles.screenContainer}>
         <GameEngine />
         <this.Title />
-        <this.HealthMeter />
+        {this.Seperator(20)}
+        <this.LifeMeters />
         <this.CharacterAnimation />
         <this.InfoBar />
+
+
         <View style={styles.buttonsContainer}>
           <Button title={"Pokemon"} />
           <Button title={"Items"} />
           <Button title={"Pokedex"} />
         </View>
+
       </View >
     );
   }
@@ -164,10 +186,22 @@ const styles = StyleSheet.create({
     backgroundColor: 'pink'
   },
   healthMeter: {
+    marginRight: '40%',
     paddingTop: 16,
     fontSize: 28,
     fontWeight: 'bold',
     color: 'white'
+  },
+  pokeballMeter: {
+    marginRight: '5%',
+    marginTop: '2%', 
+    width: 50, 
+    height: 50
+  },
+  lifeMeters: {
+    flexDirection: 'row',
+    paddingHorizontal: '10%',
+    backgroundColor: '#eb4034', // light red
   },
   infoBarText: {
     paddingTop: 10,
