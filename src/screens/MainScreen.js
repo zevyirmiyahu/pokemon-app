@@ -82,15 +82,40 @@ export default class MainScreen extends Component {
     );
   }
 
+  Seperator = (width) => {
+    return (
+      <View style={{ borderBottomWidth: width, borderColor: '#9e1920', paddingHorizontal: '50%' }}></View>
+    );
+  }
+
+  InfoBar = () => {
+    return (
+      <View>
+
+        <View
+          style={{
+            paddingLeft: '5%'
+          }}>
+          <Text style={styles.infoBarText}>Distance Traveled: </Text>
+          <Text style={styles.infoBarText}>Pokemon Caught Traveled: </Text>
+          <Text style={styles.infoBarText}>Pokeballs: 5 </Text>
+        </View>
+        <View style={{ marginTop: '10%' }}>
+          {this.Seperator(20)}
+        </View>
+
+      </View >
+    );
+  }
+
   render() {
     return (
       <View style={styles.screenContainer}>
         <GameEngine />
-        {/* <this.TitleScreen /> */}
         <this.Title />
-        <this.HealthMeter/>
-
+        <this.HealthMeter />
         <this.CharacterAnimation />
+        <this.InfoBar />
         <View style={styles.buttonsContainer}>
           <Button title={"Pokemon"} />
           <Button title={"Items"} />
@@ -104,7 +129,8 @@ export default class MainScreen extends Component {
 const styles = StyleSheet.create({
   screenContainer: {
     flex: 1,
-    justifyContent: 'center',
+    // justifyContent: 'center',
+    paddingTop: '25%',
     alignItems: 'center',
     backgroundColor: '#CE2029', // fire engine red
   },
@@ -140,6 +166,12 @@ const styles = StyleSheet.create({
   healthMeter: {
     paddingTop: 16,
     fontSize: 28,
+    fontWeight: 'bold',
+    color: 'white'
+  },
+  infoBarText: {
+    paddingTop: 10,
+    fontSize: 18,
     fontWeight: 'bold',
     color: 'white'
   }

@@ -62,13 +62,20 @@ export default class Character extends Component {
     clearInterval(interval);
   }
 
-  render() {
+  Seperator = (width) => {
+    return(
+      <View style={{borderBottomWidth: width, borderColor: '#9e1920', paddingHorizontal: '50%'}}></View>
+    );
+  }
 
+  render() {
     return (
       <View>
+        {this.Seperator(20)}
         <View style={styles.imageContainer}>
           {this.state.characterImage}
         </View>
+        {this.Seperator(20)}
       </View>
     );
   }
@@ -86,7 +93,7 @@ const styles = StyleSheet.create({
   },
   imageContainer: {
     paddingVertical: 20,
-    paddingHorizontal: 200,
+    paddingHorizontal: '40%',
     backgroundColor: '#9df0f5'
   }
 });
