@@ -49,31 +49,48 @@ export default class MainScreen extends Component {
     );
   }
 
+  Title = () => {
+    return (
+      <Image
+        source={require('../images/pokemon-logo.png')}
+        style={{ alignSelf: 'center', width: 250, height: 92 }}
+      />
+    );
+  }
+
+  CharacterAnimation = () => {
+    return (
+      <View style={styles.characterContaienr}>
+        <Character />
+      </View>
+    );
+  }
+
 
   render() {
     return (
-      <SafeAreaView>
-        <this.TitleScreen />
-        <Image
-          source={require('../images/pokemon-logo.png')}
-          style={{ alignSelf: 'center', width: 250, height: 92 }}
-        />
+      <View style={styles.screenContainer}>
+          {/* <this.TitleScreen /> */}
+          <this.Title />
+          <this.CharacterAnimation />
 
-        <View style={styles.characterContaienr}>
-          <Character />
-        </View>
-
-        <View style={styles.buttonsContainer}>
+          <View style={styles.buttonsContainer}>
           <Button title={"Pokemon"} />
           <Button title={"Items"} />
           <Button title={"Pokedex"} />
         </View>
-      </SafeAreaView>
+      </View>
     );
   }
 }
 
 const styles = StyleSheet.create({
+  screenContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#CE2029',
+  },
   characterContaienr: {
     marginVertical: 10,
     alignSelf: 'center'
