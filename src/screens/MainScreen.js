@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import { View, Text, Image, StyleSheet } from 'react-native';
-import Button from '../components/mainComponents/Button';
+import { View, Text, Modal, Image, StyleSheet } from 'react-native';
+import Button from '../components/Button';
 
-import Character from '../components/mainComponents/Character';
+import Character from '../components/Character';
 
 export default class MainScreen extends Component {
   constructor(props) {
@@ -10,6 +10,30 @@ export default class MainScreen extends Component {
     this.state = {
     };
   }
+
+  TitleScreen = () => {
+    let props = { ...this.props, title: "Main" };
+    return (
+      <View>
+        <Modal
+          visible={this.state.modalVisible}
+          animationType='slide'
+
+        >
+          <View style={{ padding: 50 }}>
+            <Image
+              style={{ alignSelf: 'center', width: 410, height: 154 }}
+              source={require('../images/pokemon-logo.png')}
+            />
+
+          </View>
+          <Button {...props} />
+
+        </Modal>
+      </View>
+    );
+  }
+
 
   render() {
     return (

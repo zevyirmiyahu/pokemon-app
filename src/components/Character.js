@@ -4,14 +4,14 @@ import { View, Text, Image, StyleSheet } from 'react-native';
 // Players stand position
 const walk1 = () => {
   return (
-    <Image source={require('../../images/CharacterWalk1.png')} style={styles.image} />
+    <Image source={require('../images/CharacterWalk1.png')} style={styles.image} />
   );
 }
 
 // Player taking a step position
 const walk2 = () => {
   return (
-    <Image source={require('../../images/CharacterWalk2.png')} style={styles.image} />
+    <Image source={require('../images/CharacterWalk2.png')} style={styles.image} />
   );
 }
 
