@@ -4,6 +4,8 @@ import { createAppContainer } from 'react-navigation';
 import { createStackNavigator } from 'react-navigation-stack';
 import { createBottomTabNavigator } from 'react-navigation-tabs';
 import { Icon } from 'react-native-elements';
+import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
+
 
 import { Provider } from 'react-redux';
 
@@ -17,16 +19,28 @@ const BottomTabNavigator = createBottomTabNavigator({
     screen: MainScreen,
     navigationOptions: {
       tabBarIcon: () => (
-        <Icon name="check-square" type='font-awesome'
+        <Icon name='home' type={FontAwesome5}
           color='#e91e63' />
       )
     }
   },
   Pokemon: {
     screen: PokedexScreen,
+    navigationOptions: {
+      tabBarIcon: () => (
+        <Icon name='adb' type='material'
+          color='#e91e63' />
+      )
+    }
   },
   Items: {
     screen: ItemScreen,
+    navigationOptions: {
+      tabBarIcon: () => (
+        <Icon name='shopping-cart' type='material'
+          color='#e91e63' />
+      )
+    }
   },
 },
   {
