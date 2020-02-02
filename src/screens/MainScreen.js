@@ -9,8 +9,9 @@ import {
   StyleSheet,
   TouchableHighlightBase
 } from 'react-native';
-import Button from '../components/Button';
+import { Icon } from 'react-native-elements';
 
+import Button from '../components/Button';
 import Character from '../components/Character';
 import GameEngine from '../engine/GameEngine';
 
@@ -67,21 +68,35 @@ export default class MainScreen extends Component {
     );
   }
 
+  HealthMeter = () => {
+    return (
+      <View style={{ flexDirection: 'row' }}>
+        <Icon
+          raised
+          name='heartbeat'
+          type='font-awesome'
+          color='#f50'
+        />
+        <Text style={styles.healthMeter}>100%</Text>
+      </View>
+    );
+  }
 
   render() {
     return (
       <View style={styles.screenContainer}>
-          <GameEngine/>
-          {/* <this.TitleScreen /> */}
-          <this.Title />
-          <this.CharacterAnimation />
+        <GameEngine />
+        {/* <this.TitleScreen /> */}
+        <this.Title />
+        <this.HealthMeter/>
 
-          <View style={styles.buttonsContainer}>
+        <this.CharacterAnimation />
+        <View style={styles.buttonsContainer}>
           <Button title={"Pokemon"} />
           <Button title={"Items"} />
           <Button title={"Pokedex"} />
         </View>
-      </View>
+      </View >
     );
   }
 }
@@ -121,6 +136,13 @@ const styles = StyleSheet.create({
   modalContainer: {
     flex: 1,
     backgroundColor: 'pink'
+  },
+  healthMeter: {
+    paddingTop: 16,
+    fontSize: 28,
+    fontWeight: 'bold',
+    color: 'white'
   }
+
 
 });

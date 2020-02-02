@@ -27,7 +27,6 @@ export default class Character extends Component {
 
   // Function that controls the walk motion of character
   walking = () => {
-    console.log("walking");
     if (this.state.flag) {
       this.setState({
         characterImage: walk1(),
@@ -67,8 +66,6 @@ export default class Character extends Component {
 
     return (
       <View>
-        <Text style={styles.header}> Character </Text>
-
         <View style={styles.imageContainer}>
           {this.state.characterImage}
         </View>
@@ -86,7 +83,7 @@ const styles = StyleSheet.create({
   image: {
     width: 80,
     height: 80
-  },  
+  },
   imageContainer: {
     paddingVertical: 20,
     paddingHorizontal: 200,

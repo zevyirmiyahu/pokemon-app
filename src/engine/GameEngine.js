@@ -5,11 +5,12 @@
 
 import React, { Component } from 'react';
 import { View, Text, Modal, StyleSheet, TouchableOpacity } from 'react-native';
-
+import { Divider, Icon } from 'react-native-elements';
 export default class GameEngine extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            modalVisible: true
         };
     }
 
@@ -24,6 +25,7 @@ export default class GameEngine extends Component {
                 <View style={styles.alertContainter}>
                     <Text style={styles.header}>Pokemon Discovered!</Text>
                     <Text style={styles.subHeader}>You found a ... Pikachu!</Text>
+                    <Divider style={{ height: 20, backgroundColor: 'blue' }} />
                     <View style={styles.buttonsGroupContainer}>
                         <this.CatchButton />
                         <this.RunButton />
@@ -39,14 +41,16 @@ export default class GameEngine extends Component {
             <TouchableOpacity style={styles.button}>
                 <Text style={styles.buttonText}>Catch!</Text>
             </TouchableOpacity>
-
         );
     }
 
     // Player chooses NOT to catch the discovered Pokemon
     RunButton = () => {
         return (
-            <TouchableOpacity style={styles.button}>
+            <TouchableOpacity
+                style={styles.button}
+                onPress={() => this.setState({ modalVisible: false })}
+            >
                 <Text style={styles.buttonText}>Run Away!</Text>
             </TouchableOpacity>
 
@@ -77,7 +81,7 @@ const styles = StyleSheet.create({
     subHeader: {
         color: 'white',
         fontSize: 28,
-        fontStyle:'italic'
+        fontStyle: 'italic'
     },
     buttonsGroupContainer: {
         flexDirection: 'row',
